@@ -158,6 +158,7 @@ private:
 };
 #endif
 
+#if 0
 //取地址&重载
 class Date
 {
@@ -177,5 +178,204 @@ private:
 };
 int main()
 {
+	return 0;
+}
+#endif
+
+
+#if 0
+//列表初始化
+class Time
+{
+public:
+	Time(int hour)
+		:_hour(hour)
+		
+	{}
+	
+private:
+	int _hour;
+
+};
+class Date
+{
+public:
+	Date(int year, int month, int day,int d,int hour)
+		:_year(year)
+		, _month(month)
+		, _day(day)
+		, _t(10)
+		, _d(d)
+		, _hour(hour)
+	{}
+private:
+	int _year;
+	int _month;
+	int _day;
+	const int  _t;//const
+	int& _d;//引用
+	Time _hour;//没用默认构造函数
+};
+#endif
+
+#if 0
+//计算程序中创建出多少类对象
+class A
+{
+public:
+	A()
+	{
+		++_count;
+	}
+	A(const A& t)
+	{
+		++_count;
+	}
+	static int Getcount()//static修饰成员函数
+	{
+		return _count;
+	}
+private:
+	static int _count;//static修饰成员变量
+};
+int A::_count = 0;
+void Test()
+{
+	cout << A::Getcount() << endl;
+	A a1, a2;
+	A a3(a1);
+	cout << A::Getcount() << endl;
+
+}
+#endif
+#if 0 
+//友元函数
+class Date
+{
+public:
+	friend ostream& operator<<(ostream& _cout, const Date& d);
+	Date(int year, int month, int day)
+		:_year(year)
+		, _month(month)
+		, _day(day)
+	{}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+ ostream& operator<<(ostream& _cout, const Date& d)
+
+{
+	_cout << d._year << "-" << d._month << "-" << d._day;
+	return _cout;
+}
+int main()
+{
+	Date d(2019,7,29);
+	cout << d;
+	return 0;
+}
+#end if
+#if 0
+class A
+{
+public:
+	friend ostream& operator<<(ostream& _cout, const Date& d);
+	A()
+		: _a(a)
+	{}
+private:
+	int _a;
+};
+class B
+{
+public:
+	friend ostream& operator<<(ostream& _cout, const Date& d);
+	B()
+		:_b(b)
+	{}
+private:
+	int _b;
+};
+ostream& operator<<(ostream& _cout, const Date& d)
+
+{
+	_cout << d._year << "-" << d._month << "-" << d._day;
+	return _cout;
+}
+int main()
+{
+	A a;
+	cout << a;
+	B b;
+	cout << b;
+	return 0;
+}
+#endif
+
+#if 0
+//友元类
+class Date;//前置声明
+class Time
+{
+	frend class Date;//声明日期类是实践类的友元类
+public:
+	Time(int hour, int minute, int second)
+		:_hour(hour)
+		, _minute(minute)
+		, _second(second)
+	{}
+private:
+	int _hour;
+	int _minute;
+	int _second;
+};
+class Date
+{
+public:
+	Date(int year = 2019,int month = 7,int day = 29)
+		:_year(year)
+		, _month(month)
+		_day(day)
+	{}
+	void Settimeofdate(int hour, int minute, int second)
+	{
+		//直接访问Time类中的私有成员
+		_t._hour = hour;
+		_t._minute = minute;
+		_t._second - second;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+	Time _t;
+};
+#endif
+
+//内部类
+
+class A
+{
+public:
+	class B
+	{
+	public:
+		void print(const A& a)
+		{
+			cout << t << endl;
+			cout << a.c << endl;
+		}
+	};
+private:
+	static int t;
+	int c;
+};
+int A::t = 1;
+int main()
+{
+	A::B b;
+	b.print(A());
 	return 0;
 }
