@@ -353,7 +353,7 @@ private:
 	Time _t;
 };
 #endif
-
+#if 0
 //内部类
 
 class A
@@ -377,5 +377,155 @@ int main()
 {
 	A::B b;
 	b.print(A());
+	return 0;
+}
+#endif
+#if 0
+//内存分布
+int globalVar = 1;//全局变量
+static int staticGlobalVar = 1;//静态全局变量
+int main()
+{
+	static int staticVat = 1;//静态局部变量
+	int localVar = 1;//局部变量
+
+	int num1[10] = { 1, 2, 3, 4, 5, 6 };
+	char char2[] = "abcd";
+	char* pChar3 = "abcd";
+	int* ptr1 = (int*)malloc(sizeof(int)* 4);
+	int* ptr2 = (int*)calloc(4, sizeof(int));
+	int* ptr3 = (int*)realloc(ptr2, sizeof(int)* 4);
+	free(ptr1);
+	free(ptr3);
+
+}
+
+void test()
+{
+	int* ptr1 = (int*)malloc(sizeof(int)* 4);
+	free(ptr1);
+	int* ptr2 = (int*)calloc(4, sizeof(int));
+	int* ptr3 = (int*)realloc(ptr2, sizeof(int)* 4);
+	free(ptr3);
+}
+#endif
+#if 0
+//new delete
+int main()
+{
+	int* p1 = new int;
+	int* p2 = new int(10);
+	int* p3 = new int[4];
+
+	delete() p1;
+	delete() p2;
+	delete[] p3;
+	return 0;
+}
+#endif
+class Test
+{
+public:
+	Test()
+		:_data(0)
+	{
+		cout << "Test()" << this << endl;
+	}
+	~Test()
+	{
+		cout << "~Test()" << this << endl;
+	}
+	private:
+	int _data;
+};
+void test1()
+{
+	//申请单个Test类型的空间
+	Test* p1 = (Test*)malloc(sizeof(Test));
+	free(p1);
+	//申请4个Test类型的空间
+	Test* p2 = (Test*)malloc(sizeof(Test)* 4);
+	free(p2);
+}
+void test2()
+{
+	//申请单个Test类型的空间
+	int* p3 = new int;
+	delete() p3;
+	//申请4个Test类型的空间
+	int* p4 = new int[4];
+	delete[] p4;
+}
+
+	/* operator new：该函数实际通过malloc来申请空间，当malloc申请空间成功时直接返回；
+	申请空间失败，尝试执行空间不足应对措施，如果改应对措施用户设置了，则继续申请，否则抛异常。 */
+void *__CRTDECL operator new(size_t size) _THROW1(_STD bad_alloc) 
+{    // try to allocate size bytes   
+	void *p;    
+	while ((p = malloc(size)) == 0)        
+	if (_callnewh(size) == 0)      
+	{           
+		// report no memory           
+		// 如果申请内存失败了，这里会抛出bad_alloc 类型异常           
+		static const std::bad_alloc nomem;            
+		_RAISE(nomem);       
+	}
+
+		return (p);
+	}
+
+/* operator delete: 该函数最终是通过free来释放空间的 */\
+void operator delete(void *pUserData)
+{
+	_CrtMemBlockHeader * pHead;
+
+	RTCCALLBACK(_RTC_Free_hook, (pUserData, 0));
+
+	if (pUserData == NULL) 
+
+		return;
+
+	_mlock(_HEAP_LOCK);  /* block other threads */        
+	__TRY
+    /* get a pointer to memory block header */           
+	pHead = pHdr(pUserData);
+
+	/* verify block type */           
+	_ASSERTE(_BLOCK_TYPE_IS_VALID(pHead->nBlockUse));
+
+	_free_dbg(pUserData, pHead->nBlockUse);
+
+	__FINALLY            
+		_munlock(_HEAP_LOCK);  /* release other threads */       
+	__END_TRY_FINALLY
+
+		return;
+}
+#endif
+#if 0
+void* operator new(size_t n)
+{
+	void* p = nullptr;
+	p = allocator<ListNode>().allocate(1);
+	p = allocator<ListNode>().allocate(1);
+	cout << "memory pool allocate" << endl;
+	return p;
+}
+ 
+void operator delete(void* p)
+{
+	allocator<ListNode>().deallocate((listNode*)p, 1);
+	cout << "memory pool deallocate" << endl;
+}
+#endif
+
+#define _CRTDBG_MAP_ALLOC 
+#include <stdlib.h>
+#include <crtdbg.h>
+int main()
+{
+	int* p1 = new int[10];
+
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
