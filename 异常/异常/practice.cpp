@@ -87,9 +87,45 @@ int main()
 
 #endif
 
+#if 0
 //这里表示这个函数抛出A/B/C/D中的某种类型的异常
 void fun()throw(A, B, C, D);
 //这里表示这个函数只会抛出bad_alloc的异常
 void* operator new(std::size_t size)throw(std::bad_alloc);
 //这里表示这个函数不会抛出异常
 void* operator new(std::size_t size, void* ptr)throw();
+#endif
+
+//自定义异常体系
+
+//服务器·开发中通常使用的异常继承体系
+class Exception
+{
+protected:
+	string _errmsg;
+	int _id;
+};
+class SqlException : public Exception
+{};
+
+class CacheException : public Exception 
+{};
+
+class HttpServerException : public Exception
+{};
+
+int main() 
+{
+	try
+	{     
+		// server.Start();       
+		// 抛出对象都是派生类对象  
+	}   
+	catch (const Exception& e) // 这里捕获父类对象就可以   
+	{}  
+	catch (...)   
+	{       
+		cout << "Unkown Exception" << endl;   
+	}
+		return 0;
+	}
