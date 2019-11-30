@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{EE17DA4A-FA7A-4F33-9DAA-34E4848671CF}</ProjectGuid>
+    <ProjectGuid>{FA95883B-8ED3-48FD-8116-9284AF7FFD09}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>string类的模拟实现</RootNamespace>
+    <RootNamespace>My1129</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,7 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="String.h" />
+    <ClCompile Include="testcpp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
