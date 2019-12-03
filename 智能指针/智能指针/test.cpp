@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+#if 0
 void _MergeSort(int* a, int left, int right, int* tmp)
 {
 	if (left >= right)
@@ -40,3 +41,18 @@ int main()
 	Mergesort(a, 5);
 	return 0;
 }
+#endif
+
+template<class T>
+class Smartptr
+{
+public:
+	Smartptr(T* ptr = nullptr)
+		:_ptr(ptr)
+	{}
+	~Smartptr()
+	{
+		if (_ptr)
+			delete _ptr;
+	}
+};
