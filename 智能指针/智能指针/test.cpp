@@ -55,4 +55,39 @@ public:
 		if (_ptr)
 			delete _ptr;
 	}
+	//让该类的对象具有指针类似的行为
+	T& operator*()
+	{
+		return *_ptr;
+	}
+	T* operator->()
+	{
+		return _ptr;
+	}
+protected:
+	T* _ptr;
 };
+
+struct A
+{
+	int a;
+	int b;
+	int c;
+};
+
+void TestFunc1()
+{
+	Smartptr<int> sp(new int);
+	*sp = 100;
+	//解引用
+	Smartptr<A> sp1(new A);
+	sp1->a = 10;
+	sp1->b = 20;
+	sp1->c = 30;
+}
+
+//int main()
+//{
+//	TestFunc1();
+//	return 0;
+//}

@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D41FCB4C-7ABE-48DE-B70D-860CBB2BD416}</ProjectGuid>
+    <ProjectGuid>{B7810370-648D-4826-9C1A-315A9E5F1C49}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>智能指针</RootNamespace>
+    <RootNamespace>My129</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,7 +78,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="auto_ptr.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
