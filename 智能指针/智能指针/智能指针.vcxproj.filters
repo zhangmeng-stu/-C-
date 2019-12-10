@@ -21,5 +21,11 @@
     <ClCompile Include="auto_ptr.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="unique_ptr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="shared_ptr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
