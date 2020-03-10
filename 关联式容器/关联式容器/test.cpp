@@ -3,6 +3,7 @@ using namespace std;
 #include <map>
 #include <string>
 #include <set>
+#include "BStree.h"
 
 #if 0
 void testmap()
@@ -89,6 +90,18 @@ void testset()
 	for (auto e : s)
 		cout << e << " ";
 	cout <<endl;
+}
+
+void TestBStree()
+{
+	int a[] = { 5, 3, 4, 1, 7, 8, 6, 0, 9 };
+	BSTree<int>bst;
+	for (auto e : a)
+		bst.Insert(e);
+
+	cout << bst.LeftMost()->_data << endl;
+	cout << bst.RightMost()->_data << endl;
+	bst.InOrder();
 }
 int main()
 {
