@@ -19,3 +19,29 @@ public:
 		return result;
 	}
 };
+
+#include <string>
+class Solution {
+public:
+	vector<string> Permutation(string str) {
+		vector<string> array;
+		if (str.size() == 0)
+			return array;
+		Permutation(array, str, 0);
+		sort(array.begin(), array.end());
+		return array;
+	}
+	void Permutation(vector<string>&array, string str, int begin)
+	{
+		if (begin == str.size() - 1)
+			array.push_back(str);
+		for (int i = begin; i <= str.size()-1; i++)
+		{
+			if (i != begin&&str[i] == str[begin])
+				continue;
+			swap(str[i], str[begin]);
+			Permutation(array, str, begin + 1);
+			swap(str[i], str[begin]);
+		}
+	}
+};
